@@ -72,17 +72,23 @@
                     <p class="text-sm font-medium">John Doe</p>
                     <p class="text-xs text-muted-foreground">Administrador</p>
                 </div>
-                <form action="{% url 'account:logout' %}" method="post" class="ml-auto">
-                    {% csrf_token %}
-                    <button type="submit"
-                        class="text-muted-foreground hover:text-foreground focus:outline-none">
-                        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1">
-                            </path>
-                        </svg>
-                    </button>
-                </form>
+                
+                {% if request.user.is_authenticated %}
+                    <form action="{% url 'account:logout' %}" method="post" class="ml-auto">
+                        {% csrf_token %}
+                        <button type="submit"
+                            class="text-muted-foreground hover:text-foreground focus:outline-none">
+                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1">
+                                </path>
+                            </svg>
+                        </button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'account:login' %}">Log-in</a>
+                {% endif %}
+                    
             </div>
         </div>
     </div>
