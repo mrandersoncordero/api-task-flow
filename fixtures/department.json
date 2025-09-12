@@ -1,0 +1,79 @@
+[
+{
+  "model": "petitions.department",
+  "pk": 1,
+  "fields": {
+    "created": "2025-09-12T13:37:09.028Z",
+    "modified": "2025-09-12T13:37:09.029Z",
+    "deleted": null,
+    "active": true,
+    "name": "Service Pack"
+  }
+},
+{
+  "model": "petitions.department",
+  "pk": 2,
+  "fields": {
+    "created": "2025-09-12T13:37:16.833Z",
+    "modified": "2025-09-12T13:37:16.833Z",
+    "deleted": null,
+    "active": true,
+    "name": "Infraestructura"
+  }
+},
+{
+  "model": "petitions.department",
+  "pk": 3,
+  "fields": {
+    "created": "2025-09-12T13:37:22.943Z",
+    "modified": "2025-09-12T13:37:22.943Z",
+    "deleted": null,
+    "active": true,
+    "name": "Social Media"
+  }
+},
+{
+  "model": "petitions.department",
+  "pk": 4,
+  "fields": {
+    "created": "2025-09-12T13:37:29.281Z",
+    "modified": "2025-09-12T13:37:29.281Z",
+    "deleted": null,
+    "active": true,
+    "name": "Sistemas"
+  }
+},
+{
+  "model": "petitions.department",
+  "pk": 5,
+  "fields": {
+    "created": "2025-09-12T13:37:34.307Z",
+    "modified": "2025-09-12T13:37:34.307Z",
+    "deleted": null,
+    "active": true,
+    "name": "Desarrollo Web"
+  }
+},
+{
+  "model": "petitions.department",
+  "pk": 6,
+  "fields": {
+    "created": "2025-09-12T13:37:38.053Z",
+    "modified": "2025-09-12T13:37:38.053Z",
+    "deleted": null,
+    "active": true,
+    "name": "Centro de Servicio EPSON"
+  }
+},
+{
+  "model": "petitions.department",
+  "pk": 7,
+  "fields": {
+    "created": "2025-09-12T13:44:49.239Z",
+    "modified": "2025-09-12T13:44:49.239Z",
+    "deleted": null,
+    "active": true,
+    "name": "Administracion"
+  }
+}
+]

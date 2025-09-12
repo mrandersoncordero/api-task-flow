@@ -1,0 +1,123 @@
+[
+{
+  "model": "petitions.company",
+  "pk": 1,
+  "fields": {
+    "created": "2025-09-12T13:45:44.794Z",
+    "modified": "2025-09-12T13:45:44.794Z",
+    "deleted": null,
+    "active": true,
+    "name": "Nardi Industrias Barquisimeto, C.A."
+  }
+},
+{
+  "model": "petitions.company",
+  "pk": 2,
+  "fields": {
+    "created": "2025-09-12T13:45:49.363Z",
+    "modified": "2025-09-12T13:45:49.363Z",
+    "deleted": null,
+    "active": true,
+    "name": "Nardi Industrias Trujillo, C.A."
+  }
+},
+{
+  "model": "petitions.company",
+  "pk": 3,
+  "fields": {
+    "created": "2025-09-12T13:45:53.822Z",
+    "modified": "2025-09-12T13:45:53.822Z",
+    "deleted": null,
+    "active": true,
+    "name": "Transporte San Gregorio, C.A."
+  }
+},
+{
+  "model": "petitions.company",
+  "pk": 4,
+  "fields": {
+    "created": "2025-09-12T13:45:58.690Z",
+    "modified": "2025-09-12T13:45:58.690Z",
+    "deleted": null,
+    "active": true,
+    "name": "Direccion General de Empresas, C.A."
+  }
+},
+{
+  "model": "petitions.company",
+  "pk": 5,
+  "fields": {
+    "created": "2025-09-12T13:46:06.589Z",
+    "modified": "2025-09-12T13:46:06.589Z",
+    "deleted": null,
+    "active": true,
+    "name": "Distribucion & Servicios Industriales, C.A."
+  }
+},
+{
+  "model": "petitions.company",
+  "pk": 6,
+  "fields": {
+    "created": "2025-09-12T13:46:10.551Z",
+    "modified": "2025-09-12T13:46:10.551Z",
+    "deleted": null,
+    "active": true,
+    "name": "Procesadora de Silice, C.A."
+  }
+},
+{
+  "model": "petitions.company",
+  "pk": 7,
+  "fields": {
+    "created": "2025-09-12T13:46:14.598Z",
+    "modified": "2025-09-12T13:46:14.598Z",
+    "deleted": null,
+    "active": true,
+    "name": "Franar, C.A."
+  }
+},
+{
+  "model": "petitions.company",
+  "pk": 8,
+  "fields": {
+    "created": "2025-09-12T13:46:17.939Z",
+    "modified": "2025-09-12T13:46:17.939Z",
+    "deleted": null,
+    "active": true,
+    "name": "Branar, C.A."
+  }
+},
+{
+  "model": "petitions.company",
+  "pk": 9,
+  "fields": {
+    "created": "2025-09-12T13:46:27.940Z",
+    "modified": "2025-09-12T13:46:27.940Z",
+    "deleted": null,
+    "active": true,
+    "name": "Matadero Industrial de Agua Santa C.A."
+  }
+},
+{
+  "model": "petitions.company",
+  "pk": 10,
+  "fields": {
+    "created": "2025-09-12T13:46:36.966Z",
+    "modified": "2025-09-12T13:46:36.966Z",
+    "deleted": null,
+    "active": true,
+    "name": "Groff Metal Industries"
+  }
+},
+{
+  "model": "petitions.company",
+  "pk": 11,
+  "fields": {
+    "created": "2025-09-12T13:46:42.233Z",
+    "modified": "2025-09-12T13:46:42.233Z",
+    "deleted": null,
+    "active": true,
+    "name": "Stal Industrias, C.A."
+  }
+}
+]
