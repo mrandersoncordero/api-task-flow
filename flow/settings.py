@@ -55,7 +55,7 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     "rest_framework",
     "rest_framework.authtoken",
-    "drf_yasg",
+    "drf_spectacular",
     "debug_toolbar",
     "dal",
     "dal_select2",
@@ -111,8 +111,16 @@ WSGI_APPLICATION = "flow.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": os.environ.get("DB_NAME", "flow"),
+        "USER": os.environ.get("DB_USER", "flow"),
+        "PASSWORD": os.environ.get("DB_PASSWORD", ""),
+        "HOST": os.environ.get("DB_HOST", "127.0.0.1"),
+        "PORT": os.environ.get("DB_PORT", "3306"),
+        "OPTIONS": {
+            "charset": "utf8mb4",
+            "init_command": "SET sql_mode='STRICT_TRANS_TABLES'",
+        },
     }
 }
 
@@ -180,21 +188,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-# SWAGGER
-SWAGGER_SETTINGS = {
-    "SECURITY_DEFINITIONS": {
-        "Token": {
-            "type": "apiKey",
-            "name": "Authorization",
-            "in": "header",
-            "description": "Añadir 'Token <ACCESS_TOKEN>' en el header",
-        }
-    },
-    "USE_SESSION_AUTH": False,  # Evita que intente autenticarse con sesión de Django
-}
-
 # Django REST Framework
 REST_FRAMEWORK = {
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
     "DEFAULT_PARSER_CLASSES": [
         "rest_framework.parsers.JSONParser",
     ],
@@ -205,6 +201,12 @@ REST_FRAMEWORK = {
     "PAGE_SIZE": 10,
 }
 
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Flow API",
+    "DESCRIPTION": "Documentación de Flow API",
+    "VERSION": "0.2.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+}
 LOGIN_REDIRECT_URL = "petitions:list"
 LOGIN_URL = "account:login"
 LOGOUT_REDIRECT_URL = "account:logout"

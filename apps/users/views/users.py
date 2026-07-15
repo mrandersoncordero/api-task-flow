@@ -28,9 +28,6 @@ from users.serializers import (
     AccountVerificationSerializer,
 )
 
-# DRF Yasg
-from drf_yasg.utils import swagger_auto_schema
-from drf_yasg import openapi
 
 # Custom Permissions
 from core.permissions import IsAdmin, IsManager, IsClient, IsEmployee
@@ -40,12 +37,6 @@ from core.functions import filter_queryset_user_by_group
 class UserLoginAPIView(APIView):
     """User login API view"""
 
-    @swagger_auto_schema(
-        request_body=UserLoginSerializer,  # Especificamos el esquema de entrada
-        responses={
-            201: openapi.Response("Login exitoso", UserModelSerializer)
-        },  # Respuesta esperada
-    )
     def post(self, request, *args, **kwargs):
         """Handle HTTP POST request."""
         serializer = UserLoginSerializer(data=request.data)
@@ -59,10 +50,6 @@ class UserLoginAPIView(APIView):
 class UserSingUpAPIView(APIView):
     """User Sing up API view."""
 
-    @swagger_auto_schema(
-        request_body=UserSingUpSerializer,
-        responses={201: openapi.Response("Registro exitoso", UserModelSerializer)},
-    )
     def post(self, request, *args, **kwargs):
         """Handle HTTP POST request."""
         serializer = UserSingUpSerializer(data=request.data)
@@ -75,22 +62,6 @@ class UserSingUpAPIView(APIView):
 class AccountVerificationAPIView(APIView):
     """Account verification API view."""
 
-    @swagger_auto_schema(
-        request_body=AccountVerificationSerializer,
-        responses={
-            200: openapi.Response(
-                "Cuenta verificada",
-                openapi.Schema(
-                    type=openapi.TYPE_OBJECT,
-                    properties={
-                        "message": openapi.Schema(
-                            type=openapi.TYPE_STRING, example="Congratulations!"
-                        )
-                    },
-                ),
-            )
-        },
-    )
     def post(self, request, *args, **kwargs):
         """Handle HTTP POST request."""
         serializer = AccountVerificationSerializer(data=request.data)
@@ -108,37 +79,6 @@ class UserListView(ListAPIView):
     serializer_class = UserModelSerializer
     permission_classes = [IsAuthenticated, IsAdmin | IsClient | IsManager | IsEmployee]
 
-    @swagger_auto_schema(
-        manual_parameters=[
-            openapi.Parameter(
-                "Authorization",
-                openapi.IN_HEADER,
-                description="Token de autenticación. Usar el formato 'Token <access_token>'",
-                type=openapi.TYPE_STRING,
-                required=True,
-                default="Token <ACCESS_TOKEN>",
-            ),
-            openapi.Parameter(
-                "email",
-                openapi.IN_QUERY,
-                description="Filtrar por email",
-                type=openapi.TYPE_STRING,
-            ),
-            openapi.Parameter(
-                "active",
-                openapi.IN_QUERY,
-                description="Filtrar por estado activo",
-                type=openapi.TYPE_BOOLEAN,
-            ),
-            openapi.Parameter(
-                "verified",
-                openapi.IN_QUERY,
-                description="Filtrar por estado verificado",
-                type=openapi.TYPE_BOOLEAN,
-            ),
-        ],
-        responses={200: UserModelSerializer(many=True)},
-    )
     def get_queryset(self):
         """Filtrar usuarios por email, estado activo y verificado."""
         user = self.request.user  # Obtener usuario autenticado
@@ -174,19 +114,6 @@ class UserDetailView(RetrieveAPIView):
     serializer_class = UserModelSerializer
     permission_classes = [IsAuthenticated, IsAdmin]
 
-    @swagger_auto_schema(
-        manual_parameters=[
-            openapi.Parameter(
-                "Authorization",
-                openapi.IN_HEADER,
-                description="Token de autenticación. Usar el formato 'Token <access_token>'",
-                type=openapi.TYPE_STRING,
-                required=True,
-                default="Token <ACCESS_TOKEN>",
-            ),
-        ],
-        responses={200: UserModelSerializer()},
-    )
     def get(self, request, *args, **kwargs):
         return super().get(request, *args, **kwargs)
 
@@ -199,42 +126,10 @@ class UserUpdateView(UpdateAPIView):
     serializer_class = UserModelSerializer
     permission_classes = [IsAuthenticated, IsAdmin]
 
-    @swagger_auto_schema(
-        manual_parameters=[
-            openapi.Parameter(
-                "Authorization",
-                openapi.IN_HEADER,
-                description="Token de autenticación. Usar el formato 'Token <access_token>'",
-                type=openapi.TYPE_STRING,
-                required=True,
-                default="Token <ACCESS_TOKEN>",
-            ),
-        ],
-        request_body=UserModelSerializer,
-        responses={200: openapi.Response("Usuario actualizado", UserModelSerializer)},
-    )
     def put(self, request, *args, **kwargs):
         """PUT - Actualiza todos los campos."""
         return super().put(request, *args, **kwargs)
 
-    @swagger_auto_schema(
-        manual_parameters=[
-            openapi.Parameter(
-                "Authorization",
-                openapi.IN_HEADER,
-                description="Token de autenticación. Usar el formato 'Token <access_token>'",
-                type=openapi.TYPE_STRING,
-                required=True,
-                default="Token <ACCESS_TOKEN>",
-            ),
-        ],
-        request_body=UserModelSerializer,
-        responses={
-            200: openapi.Response(
-                "Usuario parcialmente actualizado", UserModelSerializer
-            )
-        },
-    )
     def patch(self, request, *args, **kwargs):
         """PATCH - Actualiza solo algunos campos."""
         return super().patch(request, *args, **kwargs)
@@ -248,32 +143,6 @@ class UserDeleteView(DestroyAPIView, IsAdmin):
     serializer_class = UserModelSerializer
     permission_classes = [IsAuthenticated]
 
-    @swagger_auto_schema(
-        manual_parameters=[
-            openapi.Parameter(
-                "Authorization",
-                openapi.IN_HEADER,
-                description="Token de autenticación. Usar el formato 'Token <access_token>'",
-                type=openapi.TYPE_STRING,
-                required=True,
-                default="Token <ACCESS_TOKEN>",
-            ),
-        ],
-        responses={
-            200: openapi.Response(
-                "Usuario eliminado",
-                openapi.Schema(
-                    type=openapi.TYPE_OBJECT,
-                    properties={
-                        "message": openapi.Schema(
-                            type=openapi.TYPE_STRING,
-                            example="Usuario eliminado correctamente",
-                        )
-                    },
-                ),
-            )
-        },
-    )
     def delete(self, request, *args, **kwargs):
         """DELETE - Elimina un usuario por ID."""
         response = super().delete(request, *args, **kwargs)
@@ -287,37 +156,6 @@ class UserAPIView(APIView):
 
     permission_classes = [IsAuthenticated, IsAdmin]
 
-    @swagger_auto_schema(
-        manual_parameters=[
-            openapi.Parameter(
-                "Authorization",
-                openapi.IN_HEADER,
-                description="Token de autenticación. Usar el formato 'Token <access_token>'",
-                type=openapi.TYPE_STRING,
-                required=True,
-                default="Token <ACCESS_TOKEN>",
-            ),
-            openapi.Parameter(
-                "email",
-                openapi.IN_QUERY,
-                description="Filtrar por email",
-                type=openapi.TYPE_STRING,
-            ),
-            openapi.Parameter(
-                "active",
-                openapi.IN_QUERY,
-                description="Filtrar por estado activo",
-                type=openapi.TYPE_BOOLEAN,
-            ),
-            openapi.Parameter(
-                "verified",
-                openapi.IN_QUERY,
-                description="Filtrar por estado verificado",
-                type=openapi.TYPE_BOOLEAN,
-            ),
-        ],
-        responses={200: UserModelSerializer(many=True)},
-    )
     def get(self, request, pk=None):
         if pk:
             user = get_object_or_404(User, pk=pk)
@@ -354,45 +192,6 @@ class AddUserToGroupView(APIView):
 
     permission_classes = [IsAuthenticated, IsAdmin]
 
-    @swagger_auto_schema(
-        operation_description="Agrega un usuario a un grupo específico.",
-        manual_parameters=[
-            openapi.Parameter(
-                "Authorization",
-                openapi.IN_HEADER,
-                description="Token de autenticación. Usar el formato 'Token <access_token>'",
-                type=openapi.TYPE_STRING,
-                required=True,
-                default="Token <ACCESS_TOKEN>",
-            ),
-        ],
-        responses={
-            200: openapi.Response(
-                "Usuario agregado correctamente",
-                openapi.Schema(
-                    type=openapi.TYPE_OBJECT,
-                    properties={
-                        "message": openapi.Schema(
-                            type=openapi.TYPE_STRING,
-                            example="Usuario juan@example.com agregado al grupo Admin.",
-                        )
-                    },
-                ),
-            ),
-            404: openapi.Response(
-                "Usuario no encontrado",
-                openapi.Schema(
-                    type=openapi.TYPE_OBJECT,
-                    properties={
-                        "error": openapi.Schema(
-                            type=openapi.TYPE_STRING,
-                            example="No se encontró el usuario o el grupo.",
-                        )
-                    },
-                ),
-            ),
-        },
-    )
     def post(self, request, user_id, group_name):
         """Asigna un usuario a un grupo."""
         user = get_object_or_404(User, id=user_id)
@@ -410,57 +209,6 @@ class RemoveUserFromGroupView(APIView):
 
     permission_classes = [IsAuthenticated, IsAdmin]
 
-    @swagger_auto_schema(
-        operation_description="Elimina un usuario de un grupo específico.",
-        manual_parameters=[
-            openapi.Parameter(
-                "Authorization",
-                openapi.IN_HEADER,
-                description="Token de autenticación. Usar el formato 'Token <access_token>'",
-                type=openapi.TYPE_STRING,
-                required=True,
-                default="Token <ACCESS_TOKEN>",
-            ),
-        ],
-        responses={
-            200: openapi.Response(
-                "Usuario eliminado correctamente",
-                openapi.Schema(
-                    type=openapi.TYPE_OBJECT,
-                    properties={
-                        "message": openapi.Schema(
-                            type=openapi.TYPE_STRING,
-                            example="Usuario juan@example.com eliminado del grupo Admin.",
-                        )
-                    },
-                ),
-            ),
-            400: openapi.Response(
-                "Error: El usuario no pertenece al grupo",
-                openapi.Schema(
-                    type=openapi.TYPE_OBJECT,
-                    properties={
-                        "error": openapi.Schema(
-                            type=openapi.TYPE_STRING,
-                            example="El usuario juan@example.com no está en el grupo Admin.",
-                        )
-                    },
-                ),
-            ),
-            404: openapi.Response(
-                "Usuario o grupo no encontrado",
-                openapi.Schema(
-                    type=openapi.TYPE_OBJECT,
-                    properties={
-                        "error": openapi.Schema(
-                            type=openapi.TYPE_STRING,
-                            example="No se encontró el usuario o el grupo.",
-                        )
-                    },
-                ),
-            ),
-        },
-    )
     def delete(self, request, user_id, group_name):
         """Elimina un usuario de un grupo."""
         user = get_object_or_404(User, id=user_id)
